@@ -4,22 +4,21 @@ from .models import *
 # Register your models here.
 # machinecategory
 class MachineCategoryAdmin(admin.ModelAdmin):
-    list_display={"id","name","categoryID","machineID","imgID","description"}
+    list_display=("id","name","categoryID","machineID","imgID","description")
 
 class MachineAdmin(admin.ModelAdmin):
-    list_display={"id","maincategoryID","imgId","summary","character","techspec","stdequip","attach","descr","datash"}
+    list_display=("id","maincategoryID","imgId","summary","character","techspec","stdequip","attach","descr","datash")
 
 class ChateristicAdmin(admin.ModelAdmin):
-    list_display={"id","name","machineID","description"}
+    list_display=("id","name","machineID","description")
 
-admin.site.Register(MachineCategory,MachineCategoryAdmin)
-admin.site.Register(Mahine)
-admin.site.Register(characteristic)
-admin.site.Register(techspec)
-admin.site.Register(stdequipment)
-admin.site.Register(attach)
-admin.site.Register(stdequipment)
-admin.site.Register(datasheet)
-admin.site.Register(imageLibrary)
-admin.site.Register(customercontact)
-admin.site.Register(companycontact)
+admin.site.register(MachineCategory,MachineCategoryAdmin)
+admin.site.register(Mahine)
+admin.site.register(characteristic)
+admin.site.register(techspec)
+admin.site.register(stdequipment)
+admin.site.register(attach)
+admin.site.register(datasheet)
+admin.site.register(imageLibrary)
+admin.site.register(customercontact)
+admin.site.register(companycontact)

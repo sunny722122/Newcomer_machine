@@ -3,37 +3,37 @@ from django.db import models
 # Create your models here.
 class MachineCategory(models.Model):
     name=models.CharField(max_length=40)
-    categoryID=models.IntegerField(max=40)
-    machineID=models.IntegerField(max=400)
-    imgID=models.IntegerField(max=100)
+    categoryID=models.IntegerField()
+    machineID=models.IntegerField()
+    imgID=models.IntegerField()
     description=models.CharField(max_length=400)
     def __str__(self):
         return f"{self.name}:Category:{self.categoryID} Machine:{self.machineID} Description: {self.description}"
 
 class Mahine(models.Model):
-    maincategoryID=models.IntegerField(max=40)
-    imgId=models.IntegerField(max=100)
+    maincategoryID=models.IntegerField()
+    imgId=models.IntegerField()
     summary=models.CharField(max_length=500)
-    character=models.IntegerField(max=200)
-    techspec=models.IntegerField(max=500)
-    stdequip=models.IntegerField(max=500)
-    attach=models.IntegerField(max=500)
+    character=models.IntegerField()
+    techspec=models.IntegerField()
+    stdequip=models.IntegerField()
+    attach=models.IntegerField()
     descr=models.CharField(max_length=500)
-    datash=models.IntegerField(max=500)
+    datash=models.IntegerField()
     def __str__(self):
-        return f"{self.maincategary}:{self.summary} Description:{self.descr}"
+        return f"{self.maincategoryID}:{self.summary} Description:{self.descr}"
 
 class characteristic(models.Model):
     name=models.CharField(max_length=40)
-    machineID=models.IntegerField(max=200)
+    machineID=models.IntegerField()
     description=models.CharField(max_length=100)
 
     def __str__(self):
-        return f"{self.name}: Category: {self.cateID} Des:{self.description}"
+        return f"{self.name}: Category: {self.machineID} Des:{self.description}"
 
 class techspec(models.Model):
     name=models.CharField(max_length=40)
-    machineid=models.IntegerField(max=500)
+    machineid=models.IntegerField()
     param=models.CharField(max_length=60)
     def __str__(self):
         return f"{self.name}:{self.param} for machine {self.machineid}"
@@ -41,7 +41,7 @@ class techspec(models.Model):
 class stdequipment(models.Model):
     name=models.CharField(max_length=40)
     machineID=models.IntegerField(max_length=500)
-    imgID=models.IntegerField(max=100)
+    imgID=models.IntegerField()
     descr=models.CharField(max_length=400)
     def __str__(self):
         return f"{self.name}:{self.descr}"
@@ -49,27 +49,28 @@ class stdequipment(models.Model):
 class attach(models.Model):
     name=models.CharField(max_length=40)
     machineID=models.IntegerField(max_length=500)
-    imgID=models.IntegerField(max=100)
+    imgID=models.IntegerField()
     description=models.CharField(max_length=400)
     def __str__(self):
-        return f"{self.name}:{self.desccription}"
+        return f"{self.name}:{self.description}"
 
 class datasheet(models.Model):
     name=models.CharField(max_length=40)
-    cateID=models.IntegerField(max=40)
-    machineID=models.IntegerField(max=500)
+    cateID=models.IntegerField()
+    machineID=models.IntegerField()
     filepath=models.FileField()
-    description=models.CharField(400)
+    description=models.CharField(max_length= 400)
     def __str__(self):
         return f"{self.name}: {self.description}"
 
 class imageLibrary(models.Model):
     name=models.CharField(max_length=40)
-    itemID=models.IntegerField(max=500)
+    itemID=models.IntegerField()
     fpath=models.ImageField()
     descr=models.CharField(max_length=400)
     height=models.IntegerField()
     width=models.IntegerField()
+    description=models.CharField(max_length=200)
     def __str__(self):
         return f"{self.name}: {self.description}"
 
