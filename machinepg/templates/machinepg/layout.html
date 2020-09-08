@@ -30,7 +30,7 @@
         <div class="header">
             <div class="bg-slide"></div>
             <nav class="navbar navbar-expand-sm bg-transparent  navbar-transparent">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="{{% url 'index'%}}">
                     <img src="logo.jpg" alt="Logo" style="width:40px;">
                 </a>
                 <!-- Toggler/collapsibe Button -->
@@ -45,25 +45,56 @@
                             <a class="nav-home" href="#">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-top-level-2" href="#">Wheel loader</a>
+                            <a class="nav-top-level-2" href="#">About</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-top-level-3" href="#">Mini excavator</a>
+                            <a class="nav-top-level-3" href="#">Product</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-top-level-4" href="#">Forklift</a>
+                            <a class="nav-top-level-4" href="#">Sales & Service</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-top-level-4" href="#">Contact</a>
                         </li>
                     </ul>
                 </div>
             </nav>
         </div>
+        <hr>
     </header>
     {% block header %}
     {% endblock %}
     {% block body %}
     {% endblock %}
     <footer>
-
+        <hr>
+        
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col">
+                    {% for image in imageLibrary %}
+                        {% if image.name=="logo"%}
+                            <img src={{% image.fpath %}} alt="logo">
+                        {%  endif }
+                    {% endfor %}
+                </div>
+                <div class="col">
+                    <strong>Product</strong>
+                    <br>
+                    {% for cate in machinecategory %}
+                    <font style="vertical-align: inherit;" >
+                        <a href={% url cat.name %}>{% cat.name%}</a>
+                    </font>
+                </div>
+                <div>
+                    <strong>Contacts</strong>
+                    {% for info in contact%}
+                        <div>Tel: {% info.telinfo %}</div><br>
+                        <div>Email: {% info.email %}</div><br>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>             
     </footer>
 </body>
 

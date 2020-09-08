@@ -1,68 +1,6 @@
 from django.db import models
 
 # Create your models here.
-class MachineCategory(models.Model):
-    name=models.CharField(max_length=40)
-    categoryID=models.IntegerField()
-    machineID=models.IntegerField()
-    imgID=models.IntegerField()
-    description=models.CharField(max_length=400)
-    def __str__(self):
-        return f"{self.name}:Category:{self.categoryID} Machine:{self.machineID} Description: {self.description}"
-
-class Mahine(models.Model):
-    maincategoryID=models.IntegerField()
-    imgId=models.IntegerField()
-    summary=models.CharField(max_length=500)
-    character=models.IntegerField()
-    techspec=models.IntegerField()
-    stdequip=models.IntegerField()
-    attach=models.IntegerField()
-    descr=models.CharField(max_length=500)
-    datash=models.IntegerField()
-    def __str__(self):
-        return f"{self.maincategoryID}:{self.summary} Description:{self.descr}"
-
-class characteristic(models.Model):
-    name=models.CharField(max_length=40)
-    machineID=models.IntegerField()
-    description=models.CharField(max_length=100)
-
-    def __str__(self):
-        return f"{self.name}: Category: {self.machineID} Des:{self.description}"
-
-class techspec(models.Model):
-    name=models.CharField(max_length=40)
-    machineid=models.IntegerField()
-    param=models.CharField(max_length=60)
-    def __str__(self):
-        return f"{self.name}:{self.param} for machine {self.machineid}"
-
-class stdequipment(models.Model):
-    name=models.CharField(max_length=40)
-    machineID=models.IntegerField(max_length=500)
-    imgID=models.IntegerField()
-    descr=models.CharField(max_length=400)
-    def __str__(self):
-        return f"{self.name}:{self.descr}"
-
-class attach(models.Model):
-    name=models.CharField(max_length=40)
-    machineID=models.IntegerField(max_length=500)
-    imgID=models.IntegerField()
-    description=models.CharField(max_length=400)
-    def __str__(self):
-        return f"{self.name}:{self.description}"
-
-class datasheet(models.Model):
-    name=models.CharField(max_length=40)
-    cateID=models.IntegerField()
-    machineID=models.IntegerField()
-    filepath=models.FileField()
-    description=models.CharField(max_length= 400)
-    def __str__(self):
-        return f"{self.name}: {self.description}"
-
 class imageLibrary(models.Model):
     name=models.CharField(max_length=40)
     itemID=models.IntegerField()
@@ -73,6 +11,72 @@ class imageLibrary(models.Model):
     description=models.CharField(max_length=200)
     def __str__(self):
         return f"{self.name}: {self.description}"
+
+
+class characteristic(models.Model):
+    name=models.CharField(max_length=40)
+    
+    description=models.CharField(max_length=100)
+
+    def __str__(self):
+        return f"{self.name}:  Des:{self.description}"
+
+class techspec(models.Model):
+    name=models.CharField(max_length=40)
+    
+    param=models.CharField(max_length=60)
+    def __str__(self):
+        return f"{self.name}:{self.param} "
+
+class stdequipment(models.Model):
+    name=models.CharField(max_length=40)
+    
+    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="imagelibrary")
+    descr=models.CharField(max_length=400)
+    def __str__(self):
+        return f"{self.name}:{self.descr}"
+
+class attach(models.Model):
+    name=models.CharField(max_length=40)
+    #machineID=models.IntegerField(max_length=500)
+    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="imagelibrary")
+    description=models.CharField(max_length=400)
+    def __str__(self):
+        return f"{self.name}:{self.description}"
+
+
+
+class MachineCategory(models.Model):
+    name=models.CharField(max_length=40)
+    categoryID=models.IntegerField()
+    #machineID=models.ManyToManyField(Machine,blank=True,related_name="passengers")
+    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="imagelibrary")
+    description=models.CharField(max_length=400)
+    def __str__(self):
+        return f"{self.name}:Category:{self.categoryID} Description: {self.description}"
+
+class datasheet(models.Model):
+    name=models.CharField(max_length=40)
+    #cateID=models.ForeignKey(MachineCategory,on_delete=models.CASCADE,related_name="machinecategory")
+    #machineID=models.ForeignKey(Machine,on_delete=models.CASCADE,related_name="machine")
+    filepath=models.FileField()
+    description=models.CharField(max_length= 400)
+    def __str__(self):
+        return f"{self.name}: {self.description}"
+
+class Machine(models.Model):
+    maincategoryID=models.ForeignKey(MachineCategory,on_delete=models.CASCADE,related_name="machinecategory")
+    name=models.CharField(max_length=40)
+    imgId=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="imagelibrary")
+    summary=models.CharField(max_length=500)
+    character=models.ForeignKey(characteristic,on_delete=models.CASCADE,related_name="characteristic")
+    techspec=models.ForeignKey(techspec,on_delete=models.CASCADE,related_name="techspec")
+    stdequip=models.ForeignKey(stdequipment,on_delete=models.CASCADE,related_name="standardequipment")
+    attach=models.ForeignKey(attach,on_delete=models.CASCADE,related_name="attachment")
+    descr=models.CharField(max_length=500)
+    datash=models.ForeignKey(datasheet,on_delete=models.CASCADE,related_name="datasheet")
+    def __str__(self):
+        return f"{self.name}:{self.summary} Description:{self.descr}"
 
 class customercontact(models.Model):
     name=models.CharField(max_length=40)
