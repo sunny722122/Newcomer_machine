@@ -4,13 +4,13 @@ from .models import *
 # Register your models here.
 # machinecategory
 class MachineCategoryAdmin(admin.ModelAdmin):
-    list_display=("id","name","machineID","imgID","description")
+    list_display=("id","name","description")
 
 class MachineAdmin(admin.ModelAdmin):
-    list_display=("id","maincategoryID","imgId","summary","character","techspec","stdequip","attach","descr","datash")
+    list_display=("id","summary","character","techspec","stdequip","attach","descr","datash")
 
 class ChateristicAdmin(admin.ModelAdmin):
-    list_display=("id","name","machineID","description")
+    list_display=("id","name","description")
 
 admin.site.register(MachineCategory,MachineCategoryAdmin)
 admin.site.register(Machine)

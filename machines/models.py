@@ -1,8 +1,10 @@
 from django.db import models
+from phone_field import PhoneField
 
 # Create your models here.
 class imageLibrary(models.Model):
     name=models.CharField(max_length=40)
+    image=models.ImageField(upload_to='images')
     itemID=models.IntegerField()
     fpath=models.ImageField()
     descr=models.CharField(max_length=400)
@@ -31,7 +33,7 @@ class techspec(models.Model):
 class stdequipment(models.Model):
     name=models.CharField(max_length=40)
     
-    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="imagelibrary")
+    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="stdequipimage")
     descr=models.CharField(max_length=400)
     def __str__(self):
         return f"{self.name}:{self.descr}"
@@ -39,7 +41,7 @@ class stdequipment(models.Model):
 class attach(models.Model):
     name=models.CharField(max_length=40)
     #machineID=models.IntegerField(max_length=500)
-    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="imagelibrary")
+    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="attachimage")
     description=models.CharField(max_length=400)
     def __str__(self):
         return f"{self.name}:{self.description}"
@@ -50,7 +52,7 @@ class MachineCategory(models.Model):
     name=models.CharField(max_length=40)
     categoryID=models.IntegerField()
     #machineID=models.ManyToManyField(Machine,blank=True,related_name="passengers")
-    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="imagelibrary")
+    imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="mcimagelibrary")
     description=models.CharField(max_length=400)
     def __str__(self):
         return f"{self.name}:Category:{self.categoryID} Description: {self.description}"
@@ -67,7 +69,7 @@ class datasheet(models.Model):
 class Machine(models.Model):
     maincategoryID=models.ForeignKey(MachineCategory,on_delete=models.CASCADE,related_name="machinecategory")
     name=models.CharField(max_length=40)
-    imgId=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="imagelibrary")
+    imgid=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="mimages")
     summary=models.CharField(max_length=500)
     character=models.ForeignKey(characteristic,on_delete=models.CASCADE,related_name="characteristic")
     techspec=models.ForeignKey(techspec,on_delete=models.CASCADE,related_name="techspec")
@@ -96,8 +98,8 @@ class customercontact(models.Model):
 class companycontact(models.Model):
     companyname=models.CharField(max_length=40)
     addr=models.CharField(max_length=40)
-    telinfo=models.CharField(max_length=11)
-    faxinfo=models.CharField(max_length=11)
-    email=models.CharField(max_length=20)
+    telinfo=PhoneField(blank=True, help_text='Contact phone number')
+    faxinfo=PhoneField(blank=True, help_text='Contact phone number')
+    email=models.CharField(max_length=40)
     def __str__(self):
         return f"{self.companyname}:{self.email}"

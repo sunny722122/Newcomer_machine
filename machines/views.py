@@ -8,7 +8,7 @@ from .models import *
 def index(request):
     return render(request,"machines/index.html",{
         "machinecategory":MachineCategory.objects.all(),
-        "machines":Mahine.objects.all(),
+        "machines":Machine.objects.all(),
         "images": imageLibrary.objects.all(),
         "contact":companycontact.objects.all(),
     })
