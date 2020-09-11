@@ -10,5 +10,14 @@ def index(request):
         "machinecategory":MachineCategory.objects.all(),
         "machines":Machine.objects.all(),
         "images": imageLibrary.objects.all(),
+        "logo":imageLibrary.objects.get(name="logo"),
         "contact":companycontact.objects.all(),
+    })
+
+def category(request,category):
+    categories=MachineCategory.objects.get(name=category)
+    machines=Machine.objects.get(maincategoryID=categories)
+    return render(request,"machines/category.html",{
+        "categories":categories,
+        "machines":machines,
     })

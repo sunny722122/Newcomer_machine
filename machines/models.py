@@ -48,6 +48,7 @@ class attach(models.Model):
 
 
 
+
 class MachineCategory(models.Model):
     name=models.CharField(max_length=40)
     categoryID=models.IntegerField()
@@ -71,12 +72,17 @@ class Machine(models.Model):
     name=models.CharField(max_length=40)
     imgid=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="mimages")
     summary=models.CharField(max_length=500)
-    character=models.ForeignKey(characteristic,on_delete=models.CASCADE,related_name="characteristic")
-    techspec=models.ForeignKey(techspec,on_delete=models.CASCADE,related_name="techspec")
-    stdequip=models.ForeignKey(stdequipment,on_delete=models.CASCADE,related_name="standardequipment")
-    attach=models.ForeignKey(attach,on_delete=models.CASCADE,related_name="attachment")
-    descr=models.CharField(max_length=500)
-    datash=models.ForeignKey(datasheet,on_delete=models.CASCADE,related_name="datasheet")
+    #character=models.ForeignKey(characteristic,on_delete=models.CASCADE,related_name="characteristic")
+    character=models.ManyToManyField(characteristic,blank=True,related_name="characteristic")
+    #techspec=models.ForeignKey(techspec,on_delete=models.CASCADE,related_name="techspec")
+    techspec=models.ManyToManyField(techspec,blank=True,related_name="techspec")
+    #stdequip=models.ForeignKey(stdequipment,on_delete=models.CASCADE,related_name="standardequipment")
+    stdequip=models.ManyToManyField(stdequipment,blank=True,related_name="standardequipment")
+    attach=models.ManyToManyField(attach,blank=True,related_name="attachment")
+    #attach=models.ForeignKey(attach,blank=True,on_delete=models.CASCADE,related_name="attachment")
+    #accessory=models.ManyToManyField(accessories,blank=True,null=True, related_name="accessories")
+    descr=models.CharField(max_length=2000)
+    datash=models.ForeignKey(datasheet,blank=True, null=True, on_delete=models.CASCADE,related_name="datasheet")
     def __str__(self):
         return f"{self.name}:{self.summary} Description:{self.descr}"
 
