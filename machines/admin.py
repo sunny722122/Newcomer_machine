@@ -13,7 +13,7 @@ class ChateristicAdmin(admin.ModelAdmin):
     list_display=("id","name","description")
 
 class ImageAdmin(admin.ModelAdmin):
-    list_display=("id","image","itemID","fpath","descr","height","width","description")
+    list_display=("id","image","descr","height","width","description")
 
 admin.site.register(MachineCategory,MachineCategoryAdmin)
 admin.site.register(Machine,MachineAdmin)

@@ -5,8 +5,8 @@ from phone_field import PhoneField
 class imageLibrary(models.Model):
     name=models.CharField(max_length=40)
     image=models.ImageField(upload_to='images')
-    itemID=models.IntegerField()
-    fpath=models.ImageField()
+    #itemID=models.IntegerField()
+    #fpath=models.ImageField()
     descr=models.CharField(max_length=400)
     height=models.IntegerField()
     width=models.IntegerField()
