@@ -11,7 +11,7 @@ def index(request):
         "machines":Machine.objects.all(),
         "images": imageLibrary.objects.all(),
         "logo":imageLibrary.objects.get(name="logo"),
-        "contact":companycontact.objects.all(),
+        "contact":companycontact.objects.last(),
     })
 
 def category(request,category):
@@ -20,4 +20,9 @@ def category(request,category):
     return render(request,"machines/category.html",{
         "categories":categories,
         "machines":machines,
+        "machinecategory":MachineCategory.objects.all(),
+        "machineall":Machine.objects.all(),
+        "images": imageLibrary.objects.all(),
+        "logo":imageLibrary.objects.get(name="logo"),
+        "contact":companycontact.objects.last(),
     })

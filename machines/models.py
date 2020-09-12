@@ -105,7 +105,7 @@ class companycontact(models.Model):
     companyname=models.CharField(max_length=40)
     addr=models.CharField(max_length=40)
     telinfo=PhoneField(blank=True, help_text='Contact phone number')
-    faxinfo=PhoneField(blank=True, help_text='Contact phone number')
+    faxinfo=PhoneField(blank=True, help_text='Contact fax number')
     email=models.CharField(max_length=40)
     def __str__(self):
         return f"{self.companyname}:{self.email}"
