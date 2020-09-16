@@ -6,7 +6,7 @@ from .models import *
 
 # Create your views here.
 def index(request):
-    return render(request,"machines/index.html",{
+    return render(request,"machine/index.html",{
         "machinecategory":MachineCategory.objects.all(),
         "machines":Machine.objects.all(),
         "images": imageLibrary.objects.all(),
@@ -17,7 +17,7 @@ def index(request):
 def category(request,category):
     categories=MachineCategory.objects.get(name=category)
     machines=Machine.objects.get(maincategoryID=categories)
-    return render(request,"machines/category.html",{
+    return render(request,"machine/category.html",{
         "categories":categories,
         "machines":machines,
         "machinecategory":MachineCategory.objects.all(),
