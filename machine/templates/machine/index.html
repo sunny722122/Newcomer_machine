@@ -39,5 +39,26 @@
     </div>
 {% endblock %}
 {% block body %}
-    
+    {% for cat in machinecategory %}
+        <h3 style="margin:10px;"><p class="catetitle" style="background-color:grey;border-radius: 10%;padding:10px; 
+            text-align:center;">{{ cat.name }}</p></h3>
+        <div class="row">
+            <div class="card-deck">
+                {% for machine in machines %}
+                    {% if machine.maincategoryID.id == cat.id %}
+                        <div class="col-md-3">
+                            <div class="card" style="width:400px;padding:10px;">
+                                <img class="card-img-top" src={{ machine.imgid.image.url }} alt={{ machine.name}} style="width:100%">
+                                <div class="card-body">
+                                    <h4 class="card-title">{{ machine.name}}</h4>
+                                    <p class="card-text">{{ machine.summary}}</p>
+                                    <a href="#" class="btn btn-primary stretched-link">{{ machine.name}}</a>
+                                </div>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    {% endfor %}
 {% endblock %}
