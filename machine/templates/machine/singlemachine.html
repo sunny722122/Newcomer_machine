@@ -1,0 +1,120 @@
+{% extends "machine/layout.html"%}
+{% block header %}
+<p>Single machine</p>
+<p>{{ machine.name }}</p>
+<img src={{ machine.imgid.image.url}} alt={{ machine.name }} width="100%%" height="auto">
+<h3 style="margin:10px;"><p style="background-color:grey;border-radius: 10%;padding:10px; text-align:center;">{{ machine.name }}</p></h3>
+
+{% endblock %}
+{% block body %}
+    <h3 style="margin:10px;"><p class="catetitle" style="background-color:green;border-radius: 10%;padding:10px; 
+                text-align:center;">SUMMARY</p></h3>
+
+    <p class="summary_format">{{ machine.summary }}</p>
+    {% if characts != null %}
+        <h4 style="margin:10px;"><p class="catetitle" style="background-color:grey;border-radius: 10%;padding:10px; 
+                text-align:center;">CHARACTERISTICS</p></h4>
+        <div class="summary_format">
+            {% for characteristic in characts %}
+                <span >{{ characteristic.name }}:{{ characteristic.description}} </span> <br>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    {% if machine.techspec != null %}
+        <h3 style="margin:10px;"><p class="catetitle" style="background-color:grey;border-radius: 10%;padding:10px; 
+                text-align:center;">TECHNICAL SPECIFICATIONS</p></h3>
+        <div class="row justify-content-center">
+            <div class="col-auto">
+                <table class="table table-bordered table-responsive" >
+                    <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Value</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for techspecs in machine.techspec.all %}
+                            <tr>
+                                <th scope="row">{{ techspecs.name}}</th>
+                                <td>{{ techspecs.param}}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endif %}
+
+    {% if machine.stdequip != null %}
+        <h3 style="margin:10px;"><p class="catetitle" style="background-color:grey;border-radius: 10%;padding:10px; 
+                text-align:center;">STANDARD EQUIPMENT</p></h3>
+        <div class="row">
+            <div class="card-deck">
+                {% for stdeqp in machine.stdequip.all %}
+                    
+                    <div class="col-md-6">
+                        <div class="card" style="width:400px;padding:10px; margin-top:10px">
+                            <img class="card-img-top" src={{ stdeqp.imgID.image.url }} alt={{ stdeqp.name}} style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ stdeqp.name}}</h4>
+                                <p class="card-text">{{ stdeqp.descr}}</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    {% endif%}
+
+    {% if machine.attach != null %}
+        <h3 style="margin:10px;"><p class="catetitle" style="background-color:grey;border-radius: 10%;padding:10px; 
+                text-align:center;">ATTACHMENTS/ACCESSORIES</p></h3>
+        <div class="row">
+            <div class="card-deck">
+                {% for accessory in machine.attach.all %}
+                    
+                    <div class="col-md-6">
+                        <div class="card" style="width:400px;padding:10px;margin-top:10px">
+                            <img class="card-img-top" src={{ accessory.imgID.image.url }} alt={{ accessory.name}} style="width:100%">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ accessory.name}}</h4>
+                                <p class="card-text">{{ accessory.description}}</p>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    
+                {% endfor %}
+            </div>
+        </div>
+    {% endif%}
+
+    {% if machine.datash != null %}
+        <h3 style="margin:10px;"><p class="catetitle" style="background-color:grey;border-radius: 10%;padding:10px; 
+                text-align:center;">DATASHEET</p></h3>
+        <div class="row">
+            <div class="card-deck">
+                
+                    <div class="col-md-3">
+                        <div class="card text-center" style="width:200px;padding:10px;">
+                            <img class="card-img-top mx-auto" src={{ datasheeticon.image.url }} alt={{ machine.datash.name}} style="width:50%;">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ machine.datash.name}}</h4>
+                                <a href={{ machine.datash.filepath }} class="btn btn-primary stretched-link">{{ machine.datash.name}}</a>
+                                <form method="get" action="{{ machine.datash.filepath }}">
+                                    <button type="submit">Download!</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    
+           
+            </div>
+        </div>
+    {% endif%}
+
+    
+    
+{% endblock %}

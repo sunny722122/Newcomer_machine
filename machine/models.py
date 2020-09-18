@@ -65,7 +65,7 @@ class Machine(models.Model):
     imgid=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="mimages")
     summary=models.CharField(max_length=500)
     #character=models.ForeignKey(characteristic,on_delete=models.CASCADE,related_name="characteristic")
-    character=models.ManyToManyField(characteristic,blank=True,null=True,related_name="characteristic")
+    character=models.ManyToManyField(characteristic,blank=True,null=True,related_name="machines")
     #techspec=models.ForeignKey(techspec,on_delete=models.CASCADE,related_name="techspec")
     techspec=models.ManyToManyField(techspec,blank=True,null=True,related_name="techspec")
     #stdequip=models.ForeignKey(stdequipment,on_delete=models.CASCADE,related_name="standardequipment")

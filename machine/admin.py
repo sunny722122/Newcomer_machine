@@ -16,7 +16,7 @@ class ImageAdmin(admin.ModelAdmin):
     list_display=("id","image","description")
 
 admin.site.register(MachineCategory,MachineCategoryAdmin)
-admin.site.register(Machine,MachineAdmin)
+admin.site.register(Machine)
 admin.site.register(characteristic,ChateristicAdmin)
 admin.site.register(techspec)
 admin.site.register(stdequipment)

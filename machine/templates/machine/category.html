@@ -5,4 +5,23 @@
             text-align:center;">{{ categories.name }}</p></h3>
 {% endblock %}
 {% block body %}
+    <div class="row">
+        <div class="card-deck">
+            {% for machine in machines %}
+                
+                <div class="col-md-6">
+                    <div class="card" style="width:400px;padding:10px;margin-top:10px">
+                        <img class="card-img-top" src={{ machine.imgid.image.url }} alt={{ machine.name}} style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">{{ machine.name}}</h4>
+                            <p class="card-text">{{ machine.summary}}</p>
+                            <a href={% url 'singlemachine'  machine.name %} class="btn btn-primary stretched-link">{{ machine.name}}</a>
+                        </div>
+                    </div>
+                </div>
+                
+            {% endfor %}
+        </div>
+    </div>
+
 {% endblock %}

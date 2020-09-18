@@ -16,10 +16,23 @@ def index(request):
 
 def category(request,category):
     categories=MachineCategory.objects.get(name=category)
-    machines=Machine.objects.get(maincategoryID=categories)
+    machines=Machine.objects.filter(maincategoryID=categories)
     return render(request,"machine/category.html",{
         "categories":categories,
         "machines":machines,
+        "machinecategory":MachineCategory.objects.all(),
+        "machineall":Machine.objects.all(),
+        "images": imageLibrary.objects.all(),
+        "logo":imageLibrary.objects.get(name="logo"),
+        "contact":companycontact.objects.last(),
+    })
+
+def singlemachine(request,machinename):
+    machine=Machine.objects.get(name=machinename)
+    return render(request,"machine/singlemachine.html",{
+        "machine":machine,
+        "datasheeticon": imageLibrary.objects.get(name="datasheeticon"),
+        "characts":machine.character.all(),
         "machinecategory":MachineCategory.objects.all(),
         "machineall":Machine.objects.all(),
         "images": imageLibrary.objects.all(),

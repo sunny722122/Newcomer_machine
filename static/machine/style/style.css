@@ -4,7 +4,16 @@
     color: black;
 }
 .active, .nav-item:hover,.dropdown:hover{
-    background-color: aquamarine;
+    background-color: rgb(193, 198, 243);
     color: azure;
-    border-radius: 50%;
+    border-radius: 20%;
+}
+
+.summary_format{
+    border-radius: 25px;
+    border: 2px solid #d4ecb2;
+    padding: 10px; 
+    width: 100%;
+    height: auto;  
+    text-align:center;
 }
