@@ -86,10 +86,11 @@ class customercontact(models.Model):
     city=models.CharField(max_length=20)
     area=models.CharField(max_length=10)
     country=models.CharField(max_length=20)
-    email=models.CharField(max_length=20)
+    email=models.EmailField(max_length=100)
     telinfo=models.CharField(max_length=11)
     mobilinfo=models.CharField(max_length=11)
-    message=models.CharField(max_length=400)
+    subject=models.CharField(max_length=200,default="request")
+    message=models.CharField(max_length=500)
     def __str__(self):
         return f"{self.name}:{self.message}"
 

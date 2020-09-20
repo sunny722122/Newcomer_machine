@@ -31,7 +31,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'machine',
+    'machine.apps.MachineConfig',
     'compressor',
     'phone_field',
     'django.contrib.admin',
@@ -136,3 +136,6 @@ STATICFILES_FINDERS=[
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
+
+DEFAULT_FROM_EMAIL = 'wsunny.722@gmail.com'
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

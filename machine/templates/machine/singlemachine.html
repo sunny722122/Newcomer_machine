@@ -1,4 +1,5 @@
 {% extends "machine/layout.html"%}
+{% load static %}
 {% block header %}
 <p>Single machine</p>
 <p>{{ machine.name }}</p>
@@ -102,15 +103,10 @@
                             <img class="card-img-top mx-auto" src={{ datasheeticon.image.url }} alt={{ machine.datash.name}} style="width:50%;">
                             <div class="card-body">
                                 <h4 class="card-title">{{ machine.datash.name}}</h4>
-                                <a href={{ machine.datash.filepath }} class="btn btn-primary stretched-link">{{ machine.datash.name}}</a>
-                                <form method="get" action="{{ machine.datash.filepath }}">
-                                    <button type="submit">Download!</button>
-                                </form>
+                                <a href={{ machine.datash.filepath.url }} class="btn btn-primary stretched-link">{{ machine.datash.name}}</a>
                             </div>
                         </div>
                     </div>
-                    
-           
             </div>
         </div>
     {% endif%}
