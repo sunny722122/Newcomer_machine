@@ -1,4 +1,4 @@
-.nav.navbar-nav{
+.nav.navbar-nav,.dropdown-menu{
     background-color: rgb(146, 225, 245);
     
 }
@@ -12,7 +12,7 @@
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     
     padding:10px;
-    font-size: xx-large;
+    font-size: large;
     color: white ;
 }
 
@@ -31,11 +31,19 @@
     border-radius: 20%;
 }
 */
-.active, .nav.navbar-nav li a:hover{
+.active, .nav-item:hover{
+    background-color: rgb(233, 230, 230);
+    color: rgb(146, 225, 245) ;
+}
+
+.dropdown-item:hover{
     background-color: rgb(233, 230, 230);
     color: rgb(146, 225, 245) !important;
-    
 }
+
+.dropdown:hover>.dropdown-menu {
+    display: block;
+  }
 
 .summary_format{
     border-radius: 25px;

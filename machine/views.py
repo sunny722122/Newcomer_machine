@@ -10,6 +10,8 @@ from django.core.mail import send_mail
 # Create your views here.
 def index(request):
     return render(request,"machine/index.html",{
+        "home_page":"active",
+        "product_menu":"PRODUCT",
         "machinecategory":MachineCategory.objects.all(),
         "machineall":Machine.objects.all(),
         "images": imageLibrary.objects.all(),
@@ -21,6 +23,7 @@ def category(request,category):
     categories=MachineCategory.objects.get(name=category)
     machines=Machine.objects.filter(maincategoryID=categories)
     return render(request,"machine/category.html",{
+        "product_page":"active",
         "categories":categories,
         "machines":machines,
         "machinecategory":MachineCategory.objects.all(),
@@ -33,6 +36,8 @@ def category(request,category):
 def singlemachine(request,machinename):
     machine=Machine.objects.get(name=machinename)
     return render(request,"machine/singlemachine.html",{
+        "product_page":"active",
+        "product_menu":"single",
         "machine":machine,
         "datasheeticon": imageLibrary.objects.get(name="datasheeticon"),
         "characts":machine.character.all(),
@@ -56,6 +61,7 @@ def download_file(request,machinename,filepath):
 
 def about(request):
     return render(request,"machine/about.html",{
+        "about_page":"active",
         "machinecategory":MachineCategory.objects.all(),
         "machineall":Machine.objects.all(),
         "images": imageLibrary.objects.all(),
@@ -86,6 +92,7 @@ def contact(request):
     else:
         form=QueryForm()
         return render(request,"machine/contact.html",{
+            "contact_page":"active",
             "form":form,
             "machinecategory":MachineCategory.objects.all(),
             "machineall":Machine.objects.all(),
@@ -96,6 +103,7 @@ def contact(request):
 
 def thanks(request):
     return render(request,"machine/thanks.html",{
+            "contact_page":"active",
             "machinecategory":MachineCategory.objects.all(),
             "machineall":Machine.objects.all(),
             "images": imageLibrary.objects.all(),

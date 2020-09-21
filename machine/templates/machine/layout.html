@@ -44,34 +44,36 @@
                     <div class="collapse navbar-collapse" id="collapsibleNavbar">
                             
                             <ul class="nav navbar-nav" >
-                                <li class="nav-item active" >
+                                <li class="nav-item {{ home_page }}" >
                                     
-                                    <a class="nav-home" href="{% url 'index'%}">Home</a>
+                                    <a class="nav-link" href="{% url 'index'%}">HOME</a>
                                    
                                 </li>
-                                <li class="nav-item" >
+                                <li class="nav-item {{ about_page }}" >
                                     
-                                    <a class="nav-top-level-2" href={% url 'about' %}>About</a>
+                                    <a class="nav-link" href={% url 'about' %}>ABOUT US</a>
                                     
                                 </li>
                                 
-                                <li class="dropdown" > 
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">Product <span class="caret"></span></a>
+                                <li class="nav-item dropdown {{ product_page }}" > 
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">{{ product_menu }} <span class="caret"></span></a>
                                     <ul class="dropdown-menu">
-                                        <li class="nav-item" >
-                                            {% for cat in machinecategory %}
+                                        
+                                        {% for cat in machinecategory %}
+                                            <li class="nav-item">
                                                 <font style="vertical-align: inherit;" >
-                                                    <a href={% url 'category' cat.name %}>{{ cat.name }}</a>
+                                                    <a class="dropdown-item" href={% url 'category' cat.name %}>{{ cat.name }}</a>
                                                 </font>
-                                            {% endfor %}
-                                        </li>
+                                            </li>
+                                        {% endfor %}
+                                        
                                     </ul>
                                 </li>
-                                <li class="nav-item" >
-                                    <a class="nav-top-level-4" href="#">Sales & Service</a>
+                                <li class="nav-item {{ parts_page }}" >
+                                    <a class="nav-link" href="#">PARTS & SERVICE</a>
                                 </li>
-                                <li class="nav-item" >
-                                    <a class="nav-top-level-4" href={% url 'contact' %}>Contact</a>
+                                <li class="nav-item {{ contact_page }}" >
+                                    <a class="nav-link" href={% url 'contact' %}>CONTACT US</a>
                                 </li>
                             </ul>
 
