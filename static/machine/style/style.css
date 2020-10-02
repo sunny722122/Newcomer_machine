@@ -47,6 +47,7 @@
 
 .summary_format{
     border-radius: 25px;
+    font-weight: bold;
     border: 2px solid #d4ecb2;
     padding: 10px; 
     width: 100%;

@@ -34,6 +34,8 @@ INSTALLED_APPS = [
     'machine.apps.MachineConfig',
     'compressor',
     'phone_field',
+    'crispy_forms',
+    'djmoney',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,3 +141,4 @@ COMPRESS_PRECOMPILERS = (
 
 DEFAULT_FROM_EMAIL = 'wsunny.722@gmail.com'
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

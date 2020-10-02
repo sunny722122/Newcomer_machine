@@ -1,23 +1,28 @@
 {% extends "machine/layout.html"%} 
+{% load crispy_forms_tags %}
 {% block header %}
-    <h1>Contact us</h1>
+
 {% endblock %}
 {% block body %}
-    <div class="row">
-        <div class="col-md-8">
-            <form action="#" method="post">
-                {% csrf_token %}
-                {{ form.as_table }}
-                
-                <input type="submit"></button>
-                
-            </form>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-6">
+                <h1 class="mt-2">Contact us</h1>
+                <form action="#" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    
+                    <input type="submit" class="btn btn-success"></button>
+                    
+                </form>
 
-        </div>
-        <div class="col">
-            <h3>{{ contact.companyname }}
-            <div>Tel: {{ contact.telinfo }}</div>
-            <div>Email: {{ contact.email }}</div>
+            </div>
+            <div class="col-4">
+                <hr class="mt-0 mb-4">
+                <h3>{{ contact.companyname }}</h3>
+                <div>Tel: {{ contact.telinfo }}</div>
+                <div>Email: {{ contact.email }}</div>
+            </div>
         </div>
     </div>
 {% endblock %}

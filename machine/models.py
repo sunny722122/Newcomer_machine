@@ -1,5 +1,6 @@
 from django.db import models
 from phone_field import PhoneField
+from djmoney.models.fields import MoneyField
 
 # Create your models here.
 class imageLibrary(models.Model):
@@ -62,6 +63,7 @@ class datasheet(models.Model):
 class Machine(models.Model):
     maincategoryID=models.ForeignKey(MachineCategory,on_delete=models.CASCADE,related_name="machinecategory")
     name=models.CharField(max_length=40)
+    price=MoneyField( max_digits=14, decimal_places=2, default_currency='CAD',null=True)
     imgid=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="mimages")
     summary=models.CharField(max_length=500)
     #character=models.ForeignKey(characteristic,on_delete=models.CASCADE,related_name="characteristic")
