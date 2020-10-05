@@ -8,6 +8,7 @@ from .queryform import QueryForm
 from django.core.mail import send_mail
 
 # Create your views here.
+#main page
 def index(request):
     return render(request,"machine/index.html",{
         "home_page":"active",
@@ -19,6 +20,7 @@ def index(request):
         "contact":companycontact.objects.last(),
     })
 
+#machine category
 def category(request,category):
     categories=MachineCategory.objects.get(name=category)
     machines=Machine.objects.filter(maincategoryID=categories)
@@ -34,6 +36,7 @@ def category(request,category):
         "contact":companycontact.objects.last(),
     })
 
+#single machine
 def singlemachine(request,machinename):
     machine=Machine.objects.get(name=machinename)
     return render(request,"machine/singlemachine.html",{
@@ -49,17 +52,16 @@ def singlemachine(request,machinename):
         "contact":companycontact.objects.last(),
     })
 
-def download_file(request,machinename,filepath):
-    # fill these variables with real values
-    
+#download datasheet or brochure
+def download_file(request,machinename,filepath):   
     filename = "downloaded_file_name.extension"
-
     fl = open(filepath, 'r')
     mime_type, _ = mimetypes.guess_type(filepath)
     response = HttpResponse(fl, content_type=mime_type)
     response['Content-Disposition'] = "attachment; filename=%s" % filename
     return response
 
+#about page
 def about(request):
     return render(request,"machine/about.html",{
         "about_page":"active",
@@ -71,6 +73,7 @@ def about(request):
         "contact":companycontact.objects.last(),
     })
 
+#contact page
 def contact(request):
     if request.method=='POST':
         form=QueryForm(request.POST)
@@ -104,6 +107,7 @@ def contact(request):
             "contact":companycontact.objects.last(),
         })
 
+#after query, show thanks
 def thanks(request):
     return render(request,"machine/thanks.html",{
             "contact_page":"active",

@@ -3,30 +3,29 @@ from phone_field import PhoneField
 from djmoney.models.fields import MoneyField
 
 # Create your models here.
+#images
 class imageLibrary(models.Model):
     name=models.CharField(max_length=40)
     image=models.ImageField(upload_to='images')
-    #itemID=models.IntegerField()
-    #fpath=models.ImageField()
-    #descr=models.CharField(max_length=400)
-    #height=models.IntegerField()
-    #width=models.IntegerField()
     description=models.CharField(max_length=400)
     def __str__(self):
         return f"{self.name}: {self.description}"
-
+        
+#machine characteristic
 class characteristic(models.Model):
     name=models.CharField(max_length=40)
     description=models.CharField(max_length=100)
     def __str__(self):
         return f"{self.name}:  Des:{self.description}"
 
+#machine technical specification
 class techspec(models.Model):
     name=models.CharField(max_length=40)
     param=models.CharField(max_length=60)
     def __str__(self):
         return f"{self.name}:{self.param} "
 
+#standard equipment
 class stdequipment(models.Model):
     name=models.CharField(max_length=40)
     imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="stdequipimage")
@@ -34,52 +33,47 @@ class stdequipment(models.Model):
     def __str__(self):
         return f"{self.name}:{self.descr}"
 
+#attachments and accessories
 class attach(models.Model):
     name=models.CharField(max_length=40)
-    #machineID=models.IntegerField(max_length=500)
     imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="attachimage")
     description=models.CharField(max_length=400)
     def __str__(self):
         return f"{self.name}:{self.description}"
 
+#machine category
 class MachineCategory(models.Model):
     name=models.CharField(max_length=40)
-    #categoryID=models.IntegerField()
-    #machineID=models.ManyToManyField(Machine,blank=True,related_name="passengers")
     imgID=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="mcimagelibrary")
     description=models.CharField(max_length=400)
     def __str__(self):
         return f"{self.name}: Description: {self.description}"
 
+#datasheet or brochure
 class datasheet(models.Model):
     name=models.CharField(max_length=40)
-    #cateID=models.ForeignKey(MachineCategory,on_delete=models.CASCADE,related_name="machinecategory")
-    #machineID=models.ForeignKey(Machine,on_delete=models.CASCADE,related_name="machine")
     filepath=models.FileField()
     description=models.CharField(max_length= 400)
     def __str__(self):
         return f"{self.name}: {self.description}"
 
+#machine
 class Machine(models.Model):
     maincategoryID=models.ForeignKey(MachineCategory,on_delete=models.CASCADE,related_name="machinecategory")
     name=models.CharField(max_length=40)
     price=MoneyField( max_digits=14, decimal_places=2, default_currency='CAD',null=True)
     imgid=models.ForeignKey(imageLibrary,on_delete=models.CASCADE,related_name="mimages")
     summary=models.CharField(max_length=500)
-    #character=models.ForeignKey(characteristic,on_delete=models.CASCADE,related_name="characteristic")
     character=models.ManyToManyField(characteristic,blank=True,null=True,related_name="machines")
-    #techspec=models.ForeignKey(techspec,on_delete=models.CASCADE,related_name="techspec")
     techspec=models.ManyToManyField(techspec,blank=True,null=True,related_name="techspec")
-    #stdequip=models.ForeignKey(stdequipment,on_delete=models.CASCADE,related_name="standardequipment")
     stdequip=models.ManyToManyField(stdequipment,blank=True,null=True,related_name="standardequipment")
     attach=models.ManyToManyField(attach,blank=True,null=True,related_name="attachment")
-    #attach=models.ForeignKey(attach,blank=True,on_delete=models.CASCADE,related_name="attachment")
-    #accessory=models.ManyToManyField(accessories,blank=True,null=True, related_name="accessories")
     descr=models.CharField(max_length=2000)
     datash=models.ForeignKey(datasheet,blank=True, null=True, on_delete=models.CASCADE,related_name="datasheet")
     def __str__(self):
         return f"{self.name}:{self.summary} Description:{self.descr}"
 
+#customer's information
 class customercontact(models.Model):
     name=models.CharField(max_length=40)
     company=models.CharField(max_length=100)
@@ -96,6 +90,7 @@ class customercontact(models.Model):
     def __str__(self):
         return f"{self.name}:{self.message}"
 
+#company contact
 class companycontact(models.Model):
     companyname=models.CharField(max_length=40)
     addr=models.CharField(max_length=40)
